@@ -8,7 +8,9 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Home from '@/app/(tabs)/Home';
 import Search from '@/app/(tabs)/Search';
-import Notifications from '@/app/(tabs)/Notifications';
+import Events from '@/app/(tabs)/Events';
+import Map from '@/app/(tabs)/Map';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -27,30 +29,52 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  useEffect(() => {
+    const clearStoredData = async () => {
+      try {
+        await AsyncStorage.removeItem('searchedCity');
+        await AsyncStorage.removeItem('searchedEvents');
+      } catch (error) {
+        console.error("Error clearing stored data", error);
+      }
+    };
+
+    clearStoredData();
+  }, []);
+
   if (!loaded) {
     return null;
   }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={{
+        headerShown: false
+      }}>
         <Tab.Screen name="Home" 
         component={Home} 
         options={{
                   title: 'Home',
-                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="home.fill" color={color} />,
                 }}/>
         <Tab.Screen name="Search" 
         component={Search}
         options={{
                   title: 'Search',
-                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="search.fill" color={color} />,
+                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="searchglass.fill" color={color} />,
                 }} />
-        <Tab.Screen name="Notifications" 
-        component={Notifications}
+        <Tab.Screen name="Events" 
+        component={Events}
         options={{
-                  title: 'Notification',
-                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="bell.fill" color={color} />,
+                  title: 'Events',
+                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="event.fill" color={color} />,
+                }} />
+        <Tab.Screen name="Map" 
+        component={Map}
+        options={{
+                  title: 'Map',
+                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="map.fill" color={color} />,
                 }} />
       </Tab.Navigator>
     </ThemeProvider>

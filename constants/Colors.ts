@@ -15,6 +15,7 @@ export const Colors = {
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
     subtext: '#bbbb',
+    placeholder: '#687076',
   },
   dark: {
     text: '#ECEDEE',
@@ -24,5 +25,6 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
     subtext: '#bbbb',
+    placeholder: '#9BA1A6',
   },
 };

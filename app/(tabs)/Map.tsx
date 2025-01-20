@@ -185,8 +185,8 @@ export default function Map() {
             </View>
             <ScrollView>
               {selectedEvents.map((event) => (
-                <View key={event.id} style={styles.eventContainer}>
-                  <TouchableOpacity onPress={() => handleSaveEvent(event)}>
+                <View key={event.id} style={styles.eventContainer, {borderBottomWidth: 2, marginBottom: 10, borderColor: "gray"}}>
+                  <TouchableOpacity onPress={() => handleSaveEvent(event)} style={{marginBottom:10}}>
                     <Ionicons
                       name={savedEvents[event.id] ? "bookmark" : "bookmark-outline"}
                       size={28}

@@ -119,7 +119,7 @@ export default function Search() {
       {loading ? (
         <ActivityIndicator size="large" color={themeColors.text} />
       ) : searched && events.length === 0 ? ( // Überprüfen Sie, ob eine Suche durchgeführt wurde
-        <ThemedText style={{ color: themeColors.text }}>No Events found in City {city}</ThemedText>
+        <ThemedText style={{ color: themeColors.text , paddingHorizontal: 20 }}>No Events found in City {city}</ThemedText>
       ) : (
         <FlatList
           data={events}
